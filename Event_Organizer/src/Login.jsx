@@ -25,6 +25,10 @@ export default function LoginScreen() {
     console.log(data)
   };
 
+  const goToCreateAccount = () => {
+    navigate('/createAccount')
+  }
+
   return (
     <div className="login-container">
       <h1 className="login-title">Login</h1>
@@ -45,6 +49,7 @@ export default function LoginScreen() {
       <button onClick={handleLogin} className="login-button">
         Login
       </button>
+      <p onClick={goToCreateAccount}>Create Account</p>
     </div>
   );
 }
