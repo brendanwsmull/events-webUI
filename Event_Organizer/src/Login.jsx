@@ -9,10 +9,20 @@ export default function LoginScreen() {
   const navigate = useNavigate();
   const { profile, setProfile } = useContext(ProfileContext); // use this for access and setting profile json
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     console.log('Username:', username, 'Password:', password);
-    console.log('context test:', profile)
-    navigate('/app');
+    if (username == '' || password == '') {
+      alert("you forgot to enter in user details");
+      return
+    }
+    const response = await fetch(`http://localhost:5000/login?username=${username}&password=${password}`);
+    const data = await response.json();
+    if (data.success) {
+      setProfile(data);
+      navigate('/app');
+    }
+    else alert("invalid login");
+    console.log(data)
   };
 
   return (
