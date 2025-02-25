@@ -17,7 +17,7 @@ export function CreateAccountScreen() {
     const data = {
       username: username,
       password: password,
-      userType: userType
+      accountType: userType
     }
     const response = await fetch("http://localhost:5000/createAccount", {
       method: "POST",
