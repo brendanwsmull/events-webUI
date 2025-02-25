@@ -1,10 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './ProfileScreen.css'
 import { ProfileContext } from '../contexts/profileContext';
 import { CreateSubAccountScreen } from '../components/CreateSubComp'
 
 export function ProfileScreen() {
   const { profile, setProfile } = useContext(ProfileContext);
+  const [preferences, setPreferences] = useState('');
+  const [invite, setInvite] = useState('')
   
   return (
     <div>
@@ -16,10 +18,28 @@ export function ProfileScreen() {
         </div>
       )}
       {profile.accountType >= 2 &&
-        <p>You can invite accounts here:</p>
+        <div>
+          <p>You can invite accounts here:</p>
+          <input
+            type="text"
+            value={preferences}
+            onChange={(e) => setInvite(e.target.value)}
+            placeholder="Enter User to invite to your group/organization"
+          />
+          <button>Invite User</button>
+        </div>
       }
       {profile.accountType === 1 &&
-        <p>Edit your feed preferences here:</p>
+        <div>
+          <p>Edit your feed preferences here:</p>
+          <input
+            type="text"
+            value={preferences}
+            onChange={(e) => setPreferences(e.target.value)}
+            placeholder="Enter your preferences..."
+          />
+          <button>Update Prefrences</button>
+        </div>
       }
     </div>
   );
