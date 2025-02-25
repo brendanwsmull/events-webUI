@@ -1,25 +1,25 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './CreateAccount.css';
+import './ProfileComp.css';
+import { ProfileContext } from '../contexts/profileContext';
 
-export function CreateAccountScreen() {
+export function CreateSubAccountScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userType, setUserType] = useState('');
-  const navigate = useNavigate();
+  const { profile, setProfile } = useContext(ProfileContext);
 
-  const handleCreateAccount = async () => {
-    console.log("create button clicked")
-    if (username == '' || password == '' || userType == "") {
+  const handleCreateSubAccount = async () => {
+    console.log("create sub button clicked")
+    if (username == '' || password == '') {
       alert("Please fill out the information");
       return;
     }
     const data = {
+      hostuser: profile.username,
       username: username,
-      password: password,
-      accountType: userType
+      password: password
     }
-    const response = await fetch("http://localhost:5000/createAccount", {
+    const response = await fetch("http://localhost:5000/createSubAccount", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +28,6 @@ export function CreateAccountScreen() {
     });
     if (response.status == 201) {
         alert("Account Created!");
-        navigate("/");
     }
     else if (response.status == 400) {
         alert("Name already taken");
@@ -41,8 +40,8 @@ export function CreateAccountScreen() {
   }
 
   return (
-    <div className="login-container">
-      <h1 className="login-title">Create Account</h1>
+    <div >
+      <h3>Create Sub Account</h3>
       <p>Enter your username below</p>
       <input
         type="text"
@@ -59,21 +58,11 @@ export function CreateAccountScreen() {
         onChange={(e) => setPassword(e.target.value)}
         className="login-input"
       />
-      <p>Select a User Type</p>
-      <select 
-      id="userType" 
-      value={userType} 
-      onChange={(e) => setUserType(e.target.value)}
-      className="login-button">
-        <option value="">-- Select --</option>
-        <option value={1}>Normal User</option>
-        <option value={3}>Organization User</option>
-      </select>
-      <button onClick={handleCreateAccount} className="login-button">
+      <button onClick={handleCreateSubAccount} className="login-button">
         Create Account
       </button>
     </div>
   );
 }
 
-export default CreateAccountScreen;
+export default CreateSubAccountScreen;
