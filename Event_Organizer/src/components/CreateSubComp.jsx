@@ -15,7 +15,7 @@ export function CreateSubAccountScreen() {
       return;
     }
     const data = {
-      hostuser: profile.UUID,
+      hostuser: profile.uuid,
       username: username,
       password: password
     }
