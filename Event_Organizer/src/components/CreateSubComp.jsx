@@ -15,7 +15,7 @@ export function CreateSubAccountScreen() {
       return;
     }
     const data = {
-      hostuser: profile.username,
+      hostuser: profile.UUID,
       username: username,
       password: password
     }
@@ -34,8 +34,8 @@ export function CreateSubAccountScreen() {
         return;
     }
     else {
-        alert("Something else went wrong");
-        return
+        alert("Something else went wrong while attempting to create sub-account");
+        return;
     }
   }
 
