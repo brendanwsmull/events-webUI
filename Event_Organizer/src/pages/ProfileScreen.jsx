@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import './ProfileScreen.css'
 import { ProfileContext } from '../contexts/profileContext';
 import { CreateSubAccountScreen } from '../components/CreateSubComp'
+import { RegularUserProfile } from '../components/regularUserProfile';
 
 export function ProfileScreen() {
   const { profile, setProfile } = useContext(ProfileContext);
-  const [ preferences, setPreferences ] = useState('');
   const [ invite, setInvite ] = useState('');
   const [ isPrivate, setIsPrivate ] = useState('');
   const navigate = useNavigate();
@@ -43,6 +43,29 @@ export function ProfileScreen() {
     setIsPrivate(profile.isPrivate ? "Private" : "Public");
   };
 
+  const inviteUser = async () => {
+    const data = {
+      UUID: profile.UUID,
+      invitedUser: invite
+    };
+    const response = await fetch("", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status == 200) {
+      alert("invite sent!");
+    }
+    else if (response.status == 400) {
+      alert("user does not exist");
+    }
+    else {
+      alert("500 error, something went wrong");
+    }
+  };
+
   return (
     <div>
       <button className="logout-button" onClick={handleLogout}>
@@ -64,20 +87,13 @@ export function ProfileScreen() {
             onChange={(e) => setInvite(e.target.value)}
             placeholder="Enter User to invite to your group/organization"
           />
-          <button>Invite User</button>
+          <button onClick={inviteUser()}>Invite User</button>
           <p>This account is {isPrivate} <button onClick={handlePrivate}>toggle</button></p>
         </div>
       }
       {profile.accountType === 1 &&
         <div>
-          <p>Edit your feed preferences here:</p>
-          <input
-            type="text"
-            value={preferences}
-            onChange={(e) => setPreferences(e.target.value)}
-            placeholder="Enter your preferences..."
-          />
-          <button>Update Prefrences</button>
+          <RegularUserProfile />
         </div>
       }
     </div>
