@@ -1,13 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { ProfileContext } from '../contexts/profileContext';
 
-export function InviteComponent() {
-  const inviteResponse = async () => {
+export function InviteComponent({ groupName }) {
+  const { profile, setProfile } = useContext(ProfileContext);
+  const baseURL = 'http://localhost:5000/';
+
+  const inviteResponse = async (accept) => {
     // TODO: send either the accept or reject response to the invite
+    const data = {
+      UUID: profile.uuid,
+      group: groupName,
+      accept: accept
+    };
+    const response = await fetch(baseURL + "inviteResponse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    });
+    const result = await response.json();
+    if (result.success) {
+      console.log("responded to invite");
+    } else {
+      alert("Something went wrong.");
+    }
   };
   
   return (
     <div>
-      <p>hello world</p>
+      <p>{groupName} has invited you to join their group.</p>
+      <button onClick={() => inviteResponse(true)}>Accept</button>
+      <button onClick={() => inviteResponse(false)}>Reject</button>
     </div>
   );
 };

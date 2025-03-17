@@ -9,14 +9,14 @@ export function RegularUserProfile() {
   const [ joinAccount, setJoinAccount ] = useState('');
   const [ currentGroups, setCurrentGroups ] = useState('None');
   const [ distance, setDistance ] = useState('0');
-  const [ invitedToGroups, setInvitedToGroups ] = useState(''); // to hold the json of groups the user is invited to
+  const [ invitedToGroups, setInvitedToGroups ] = useState(['test1', 'test2', 'test3']); // to hold the json of groups the user is invited to
   const baseURL = 'http://localhost:5000/';
 
   const updatePreferences = async () => {
     // TODO: send api request to insert new string of prefrences
     // TODO: update preferences state to reflect what was inside the box
 
-    data = {
+    const data = {
       UUID: profile.uuid, 
       pref: preferences
     };
@@ -37,12 +37,12 @@ export function RegularUserProfile() {
 
   const sendJoinRequest = async () => {
     // TODO: send api request to join account
-    data = {
+    const data = {
       UUID: profile.uuid, 
       joining: joinAccount
     };
 
-    const response = await fetch(baseURL+"updatePreferences", {
+    const response = await fetch(baseURL+"sendJoinRequest", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -78,7 +78,7 @@ export function RegularUserProfile() {
 
   const updateDistance = async () => {
     // TODO: send the new prefered distance to the api
-    data = {
+    const data = {
       UUID: profile.uuid, 
       dist: distance
     };
@@ -101,7 +101,7 @@ export function RegularUserProfile() {
     const response = await fetch(baseURL+`getInvitedList?UUID=${profile.uuid}`);
     const data = await response.json();
     if (data.success) {
-      setInvitedToGroups(data);
+      setInvitedToGroups(data.groups);
     }
     else alert("something went wrong");
   };
@@ -137,7 +137,13 @@ export function RegularUserProfile() {
       <button onClick={sendJoinRequest}>Send Request</button>
       <p>You are currently apart of these groups: {currentGroups}</p>
       <p>These groups are inviting you to join their group/organization</p>
-      <InviteComponent />
+      {invitedToGroups.length > 0 ? (
+        invitedToGroups.map((group, index) => (
+          <InviteComponent key={index} groupName={group} />
+        ))
+      ) : (
+        <p>No invitations at this time.</p>
+      )}
       <p>your current prefered distance is:</p>
       <input
         type='text'
