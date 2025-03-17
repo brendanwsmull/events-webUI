@@ -35,6 +35,15 @@ export function RegularUserProfile() {
   }
   };
 
+  const getPrefs = async () => {
+    const response = await fetch(baseURL+`getPrefs?UUID=${profile.uuid}`);
+    const data = await response.json();
+    if (data.success) {
+      setPreferences(data.prefs);
+    }
+    else alert("something went wrong");
+  };
+
   const sendJoinRequest = async () => {
     // TODO: send api request to join account
     const data = {
@@ -112,6 +121,7 @@ export function RegularUserProfile() {
       // await getCurrentGroups();
       // await getDistance();
       // await getInvitedList();
+      // await getPrefs();
     };
     getData();
   }, []);
