@@ -48,7 +48,7 @@ export function ProfileScreen() {
       UUID: profile.uuid,
       invitedUser: invite
     };
-    const response = await fetch("", {
+    const response = await fetch("http://localhost:5000/inviteAccount", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
