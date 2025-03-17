@@ -45,7 +45,7 @@ export function ProfileScreen() {
 
   const inviteUser = async () => {
     const data = {
-      UUID: profile.UUID,
+      UUID: profile.uuid,
       invitedUser: invite
     };
     const response = await fetch("", {
