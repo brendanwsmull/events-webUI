@@ -9,39 +9,109 @@ export function RegularUserProfile() {
   const [ joinAccount, setJoinAccount ] = useState('');
   const [ currentGroups, setCurrentGroups ] = useState('None');
   const [ distance, setDistance ] = useState('0');
+  const [ invitedToGroups, setInvitedToGroups ] = useState(''); // to hold the json of groups the user is invited to
   const baseURL = 'http://localhost:5000/';
 
   const updatePreferences = async () => {
     // TODO: send api request to insert new string of prefrences
     // TODO: update preferences state to reflect what was inside the box
+
+    data = {
+      UUID: profile.uuid, 
+      pref: preferences
+    };
+
+    const response = await fetch(baseURL+"updatePreferences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 200) {
+      alert("Change successful!");
+  } else {
+      alert("Something went wrong");
+  }
   };
 
   const sendJoinRequest = async () => {
     // TODO: send api request to join account
+    data = {
+      UUID: profile.uuid, 
+      joining: joinAccount
+    };
+
+    const response = await fetch(baseURL+"updatePreferences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 200) {
+      alert("Request Sent");
+  } else {
+      alert("Something went wrong");
+  }
   };
 
   const getCurrentGroups = async () => {
     // TODO: get list of current groups and display them in a string inside of currentGroups
+    const response = await fetch(baseURL+`getCurrentGroups?UUID=${profile.uuid}`);
+    const data = await response.json();
+    if (data.success) {
+      setCurrentGroups(data.groups);
+    }
+    else alert("something went wrong");
   };
 
   const getDistance = async () => {
     // TODO: get the current prefered distance willing to travel via api call and get response back
+    const response = await fetch(baseURL+`getDistance?UUID=${profile.uuid}`);
+    const data = await response.json();
+    if (data.success) {
+      setDistance(data.distance);
+    }
+    else alert("something went wrong");
   };
 
   const updateDistance = async () => {
     // TODO: send the new prefered distance to the api
+    data = {
+      UUID: profile.uuid, 
+      dist: distance
+    };
+    const response = await fetch(baseURL+"updateDistance", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data),
+    });
+    if (response.status === 200) {
+      alert("Update Complete");
+  } else {
+      alert("Something went wrong");
+  }
   };
 
   const getInvitedList = async () => {
     // TODO: get list of invites from organization accounts
+    const response = await fetch(baseURL+`getInvitedList?UUID=${profile.uuid}`);
+    const data = await response.json();
+    if (data.success) {
+      setInvitedToGroups(data);
+    }
+    else alert("something went wrong");
   };
 
-  // calling the 3 get functions first
+  // calling the 3 get functions first at page load only once
   useEffect(() => {
     const getData = async () => {
-      await getCurrentGroups();
-      await getDistance();
-      await getInvitedList();
+      // await getCurrentGroups();
+      // await getDistance();
+      // await getInvitedList();
     };
     getData();
   }, []);
