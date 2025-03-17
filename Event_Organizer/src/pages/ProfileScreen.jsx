@@ -83,11 +83,10 @@ export function ProfileScreen() {
           <p>You can invite accounts here:</p>
           <input
             type="text"
-            value={preferences}
             onChange={(e) => setInvite(e.target.value)}
             placeholder="Enter User to invite to your group/organization"
           />
-          <button onClick={inviteUser()}>Invite User</button>
+          <button onClick={inviteUser}>Invite User</button>
           <p>This account is {isPrivate} <button onClick={handlePrivate}>toggle</button></p>
         </div>
       }
