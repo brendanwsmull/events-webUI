@@ -6,7 +6,7 @@ export function InviteComponent({ groupName }) {
   const baseURL = 'http://localhost:5000/';
 
   const inviteResponse = async (accept) => {
-    // TODO: send either the accept or reject response to the invite
+    // send either the accept or reject response to the invite
     const data = {
       UUID: profile.uuid,
       group: groupName,
@@ -22,6 +22,8 @@ export function InviteComponent({ groupName }) {
     const result = await response.json();
     if (result.success) {
       console.log("responded to invite");
+    } else if (result.error === "private") {
+      alert("You cannot join a private account");
     } else {
       alert("Something went wrong.");
     }

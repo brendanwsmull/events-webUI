@@ -60,9 +60,13 @@ export function RegularUserProfile() {
     });
     if (response.status === 200) {
       alert("Request Sent");
-  } else {
+    } else if (response.status === 403) {
+      alert("Cannot join a private account");
+    } else if (response.status === 400) {
+      alert("Entered account name does not exist")
+    } else {
       alert("Something went wrong");
-  }
+    }
   };
 
   const getCurrentGroups = async () => {
