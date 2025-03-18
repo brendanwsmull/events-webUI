@@ -106,7 +106,7 @@ export function RegularUserProfile() {
   };
 
   const getInvitedList = async () => {
-    // TODO: get list of invites from organization accounts
+    // get list of invites from organization accounts
     const response = await fetch(baseURL+`getInvitedList?UUID=${profile.uuid}`);
     const data = await response.json();
     if (data.success) {
@@ -120,7 +120,7 @@ export function RegularUserProfile() {
     const getData = async () => {
       // await getCurrentGroups();
       // await getDistance();
-      // await getInvitedList();
+      await getInvitedList();
       // await getPrefs();
     };
     getData();
