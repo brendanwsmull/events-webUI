@@ -122,7 +122,7 @@ export function RegularUserProfile() {
   // calling the 3 get functions first at page load only once
   useEffect(() => {
     const getData = async () => {
-      // await getCurrentGroups();
+      await getCurrentGroups();
       // await getDistance();
       await getInvitedList();
       // await getPrefs();
