@@ -9,7 +9,7 @@ export function RegularUserProfile() {
   const [ joinAccount, setJoinAccount ] = useState('');
   const [ currentGroups, setCurrentGroups ] = useState('None');
   const [ distance, setDistance ] = useState('0');
-  const [ invitedToGroups, setInvitedToGroups ] = useState(['test1', 'test2', 'test3']); // to hold the json of groups the user is invited to
+  const [ invitedToGroups, setInvitedToGroups ] = useState([]); // to hold the json of groups the user is invited to
   const baseURL = 'http://localhost:5000/';
 
   const updatePreferences = async () => {
