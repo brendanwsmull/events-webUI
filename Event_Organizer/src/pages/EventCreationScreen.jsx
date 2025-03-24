@@ -8,6 +8,7 @@ export function EventCreationScreen() {
   const [ address, setAddress ] = useState('');
   const [ cap, setCap ] = useState(0);
   const [ tags, setTags ] = useState('');
+  const [eventDateTime, setEventDateTime] = useState('');
   const baseURL = 'http://localhost:5000/';
 
   const submitEvent = async () => {
@@ -22,7 +23,8 @@ export function EventCreationScreen() {
       address: address,
       desc: desc,
       cap: cap,
-      tags: tags
+      tags: tags,
+      date: eventDateTime
     };
     console.log(data);
     const response = await fetch(baseURL+"createEvent", {
@@ -55,6 +57,12 @@ export function EventCreationScreen() {
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         placeholder='Name of your event'
+      />
+      <p>When is your event happening?</p>
+      <input
+        type="datetime-local"
+        value={eventDateTime}
+        onChange={(e) => setEventDateTime(e.target.value)}
       />
       <p>Please Describe your Event:</p>
       <textarea
