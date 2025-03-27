@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 
 export function InviteComponent({ groupName }) {
   const { profile, setProfile } = useContext(ProfileContext);
+  const [ responded, setResponded ] = useState(false);
   const baseURL = 'http://localhost:5000/';
 
   const inviteResponse = async (accept) => {
@@ -22,6 +23,7 @@ export function InviteComponent({ groupName }) {
     const result = await response.json();
     if (result.success) {
       console.log("responded to invite");
+      setResponded(true);
     } else {
       alert("Something went wrong.");
     }
@@ -29,9 +31,15 @@ export function InviteComponent({ groupName }) {
   
   return (
     <div>
-      <p>{groupName} has invited you to join their group.</p>
-      <button onClick={() => inviteResponse(true)}>Accept</button>
-      <button onClick={() => inviteResponse(false)}>Reject</button>
+      {!responded ? (
+        <div>
+          <p>{groupName} has invited you to join their group.</p>
+          <button onClick={() => inviteResponse(true)}>Accept</button>
+          <button onClick={() => inviteResponse(false)}>Reject</button>
+        </div>
+      ) : (
+        <p>Responded to the {groupName}'s invite!</p>
+      )}
     </div>
   );
 };
