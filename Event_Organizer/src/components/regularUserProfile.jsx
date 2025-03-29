@@ -125,7 +125,7 @@ export function RegularUserProfile() {
       await getCurrentGroups();
       // await getDistance();
       await getInvitedList();
-      // await getPrefs();
+      await getPrefs();
     };
     getData();
   }, []);
