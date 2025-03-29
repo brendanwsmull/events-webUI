@@ -49,14 +49,14 @@ export function EventCreationScreen() {
         type='text'
         value={eventName}
         onChange={(e) => setEventName(e.target.value)}
-        placeholder='Address of your event'
+        placeholder='Name of your event'
       />
       <p>What is the address of your event?</p>
       <input
         type='text'
         value={address}
         onChange={(e) => setAddress(e.target.value)}
-        placeholder='Name of your event'
+        placeholder='Address of your event'
       />
       <p>When is your event happening?</p>
       <input

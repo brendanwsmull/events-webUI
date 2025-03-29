@@ -4,15 +4,23 @@ import './ProfileScreen.css'
 import { ProfileContext } from '../contexts/profileContext';
 import { CreateSubAccountScreen } from '../components/CreateSubComp'
 import { RegularUserProfile } from '../components/regularUserProfile';
+import { EventBlockComp } from '../components/eventBlockComp';
 
 export function ProfileScreen() {
   const { profile, setProfile } = useContext(ProfileContext);
   const [ invite, setInvite ] = useState('');
   const [ isPrivate, setIsPrivate ] = useState('');
+  const [ attendingEvents, setAttendingEvents ] = useState([]);
+  const [ hostingEvents, setHostingEvents ] = useState([]);
   const navigate = useNavigate();
+  const baseURL = "http://localhost:5000/"
 
   useEffect(() => {
     setIsPrivate(profile.isPrivate ? "Private" : "Public");
+    const getData = async () => {
+      await getEvents();
+    };
+    getData();
   }, [])
 
   const handleLogout = () => {
@@ -66,6 +74,17 @@ export function ProfileScreen() {
     }
   };
 
+  const getEvents = async () => {
+    const response = await fetch(baseURL+`getUserEvents?UUID=${profile.uuid}`);
+    if (response.status != 200) {
+      alert("Something went wrong when getting your events");
+      return;
+    }
+    const data = await response.json();
+    setAttendingEvents(data.attendingEvents);
+    setHostingEvents(data.hostingEvents);
+  };
+
   return (
     <div>
       <button className="logout-button" onClick={handleLogout}>
@@ -95,6 +114,10 @@ export function ProfileScreen() {
           <RegularUserProfile />
         </div>
       }
+      <p>Events you're currently signed up for:</p>
+      <EventBlockComp events={attendingEvents}/>
+      <p>Your Events:</p>
+      <EventBlockComp events={hostingEvents}/>
     </div>
   );
 }
