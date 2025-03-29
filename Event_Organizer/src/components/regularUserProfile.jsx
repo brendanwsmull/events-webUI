@@ -13,8 +13,8 @@ export function RegularUserProfile() {
   const baseURL = 'http://localhost:5000/';
 
   const updatePreferences = async () => {
-    // TODO: send api request to insert new string of prefrences
-    // TODO: update preferences state to reflect what was inside the box
+    // send api request to insert new string of prefrences
+    // update preferences state to reflect what was inside the box
 
     const data = {
       UUID: profile.uuid, 
@@ -70,7 +70,7 @@ export function RegularUserProfile() {
   };
 
   const getCurrentGroups = async () => {
-    // TODO: get list of current groups and display them in a string inside of currentGroups
+    // get list of current groups and display them in a string inside of currentGroups
     const response = await fetch(baseURL+`getCurrentGroups?UUID=${profile.uuid}`);
     const data = await response.json();
     if (data.success) {
@@ -80,7 +80,7 @@ export function RegularUserProfile() {
   };
 
   const getDistance = async () => {
-    // TODO: get the current prefered distance willing to travel via api call and get response back
+    // get the current prefered distance willing to travel via api call and get response back
     const response = await fetch(baseURL+`getDistance?UUID=${profile.uuid}`);
     const data = await response.json();
     if (data.success) {
@@ -90,7 +90,7 @@ export function RegularUserProfile() {
   };
 
   const updateDistance = async () => {
-    // TODO: send the new prefered distance to the api
+    // send the new prefered distance to the api
     const data = {
       UUID: profile.uuid, 
       dist: distance
@@ -123,7 +123,7 @@ export function RegularUserProfile() {
   useEffect(() => {
     const getData = async () => {
       await getCurrentGroups();
-      // await getDistance();
+      await getDistance();
       await getInvitedList();
       await getPrefs();
     };
