@@ -119,8 +119,8 @@ export function ProfileScreen() {
         <p>No events found</p>
       ) : (
         <div className="event-container">
-          {attendingEvents.map((event) => (
-            <EventBlockComp key={index} event={event} />
+          {attendingEvents.map((event, index) => (
+            <EventBlockComp key={index} event={event} type={1}/>
           ))}
         </div>
       )}
@@ -129,8 +129,8 @@ export function ProfileScreen() {
         <p>No events found</p>
       ) : (
         <div className="event-container">
-          {hostingEvents.map((event) => (
-            <EventBlockComp key={index} event={event} />
+          {hostingEvents.map((event, index) => (
+            <EventBlockComp key={index} event={event} type={2}/>
           ))}
         </div>
       )}
