@@ -91,6 +91,11 @@ export function RegularUserProfile() {
 
   const updateDistance = async () => {
     // send the new prefered distance to the api
+    const numDist = Number(distance);
+    if (!Number.isInteger(numDist) || numDist < 0) {
+      alert("Please esnure distance is an integer greater than or equal to 0!");
+      return;
+    }
     const data = {
       UUID: profile.uuid, 
       dist: distance
@@ -160,7 +165,8 @@ export function RegularUserProfile() {
       )}
       <p>your current prefered distance is:</p>
       <input
-        type='text'
+        type="number"
+        min="0"
         value={distance}
         onChange={(e) => setDistance(e.target.value)}
         placeholder='Something went wrong...'
