@@ -23,6 +23,7 @@ export function InviteComponent({ groupName }) {
     const result = await response.json();
     if (result.success) {
       console.log("responded to invite");
+      setResponded(true);
     } else if (result.error === "private") {
       alert("You cannot join a private account");
     } else {
@@ -39,7 +40,7 @@ export function InviteComponent({ groupName }) {
           <button onClick={() => inviteResponse(false)}>Reject</button>
         </div>
       ) : (
-        <p>Responded to the {groupName}'s invite!</p>
+        <p>Responded to {groupName}'s invite!</p>
       )}
     </div>
   );

@@ -115,9 +115,25 @@ export function ProfileScreen() {
         </div>
       }
       <p>Events you're currently signed up for:</p>
-      <EventBlockComp events={attendingEvents}/>
+      {attendingEvents.length === 0 ? (
+        <p>No events found</p>
+      ) : (
+        <div className="event-container">
+          {attendingEvents.map((event) => (
+            <EventBlockComp key={index} event={event} />
+          ))}
+        </div>
+      )}
       <p>Your Events:</p>
-      <EventBlockComp events={hostingEvents}/>
+      {hostingEvents.length === 0 ? (
+        <p>No events found</p>
+      ) : (
+        <div className="event-container">
+          {hostingEvents.map((event) => (
+            <EventBlockComp key={index} event={event} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
