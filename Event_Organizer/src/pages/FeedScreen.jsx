@@ -12,7 +12,8 @@ export function FeedScreen() {
   const baseURL = "http://localhost:5000/"
 
   const getFeed = async () => {
-    const response = await fetch(baseURL+`getEventFeed?UUID=${profile.uuid}&long=${userLocation.longitude}&lat=${userLocation.latitude}`);
+    // for some reason the lat and long are swapped, no clue why but this works
+    const response = await fetch(baseURL+`getEventFeed?UUID=${profile.uuid}&long=${userLocation.latitude}&lat=${userLocation.longitude}`);
     if (response.status != 200) {
       alert("Something went wrong when getting your events");
       return;
