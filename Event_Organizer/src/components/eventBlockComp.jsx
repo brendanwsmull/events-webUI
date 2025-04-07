@@ -32,6 +32,19 @@ export function EventBlockComp({ event, type }) {
       return
     }
   }
+
+  const signUp = async () => {
+    const response = await fetch(baseURL+ `signUp?UUID=${profile.uuid}&UEID=${event.UEID}&cap=${event.cap}`);
+    if (response.status === 200) {
+      console.log("event deletion success");
+      alert("Signed up for the event!");
+      return;
+    }
+    else {
+      alert("Something went wrong when trying to sign up for your event!");
+      return
+    }
+  }
   
   return (
     <div className="event-block">
@@ -48,6 +61,7 @@ export function EventBlockComp({ event, type }) {
           <p><b>Tags:</b> {event.tags}</p>
           {type === 1 && <button onClick={unSignUp}>Remove</button>}
           {type === 2 && <button onClick={deleteEvent}>Delete Event</button>}
+          {type === 3 && <button onClick={signUp}>Sign Up</button>}
         </div>
       ) : (
         <div>
