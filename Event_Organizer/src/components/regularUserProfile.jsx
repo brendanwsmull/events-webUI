@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 import { InviteComponent } from './inviteComponent'
+import { Button } from 'react-bootstrap';
 
 export function RegularUserProfile() {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -144,7 +145,7 @@ export function RegularUserProfile() {
         onChange={(e) => setPreferences(e.target.value)}
         placeholder="Enter your preferences..."
       />
-      <button onClick={updatePreferences}>Update Prefrences</button>
+      <Button variant="outline-primary" onClick={updatePreferences}>Update Prefrences</Button>
       <p>Current Preferences: {currentPreferences}</p>
       <p>Request to join an organizatino/group:</p>
       <input 
@@ -153,7 +154,7 @@ export function RegularUserProfile() {
         onChange={(e) => setJoinAccount(e.target.value)}
         placeholder="Enter account name here"
       />
-      <button onClick={sendJoinRequest}>Send Request</button>
+      <Button variant="outline-primary" onClick={sendJoinRequest}>Send Request</Button>
       <p>You are currently apart of these groups: {currentGroups}</p>
       <p>These groups are inviting you to join their group/organization</p>
       {invitedToGroups.length > 0 ? (
@@ -171,7 +172,7 @@ export function RegularUserProfile() {
         onChange={(e) => setDistance(e.target.value)}
         placeholder='Something went wrong...'
       />
-      <button onClick={updateDistance}>Update Disance Preference</button>
+      <Button variant="outline-primary" onClick={updateDistance}>Update Disance Preference</Button>
     </div>
   );
 };

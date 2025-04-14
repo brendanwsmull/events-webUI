@@ -5,6 +5,7 @@ import { ProfileContext } from '../contexts/profileContext';
 import { CreateSubAccountScreen } from '../components/CreateSubComp'
 import { RegularUserProfile } from '../components/regularUserProfile';
 import { EventBlockComp } from '../components/eventBlockComp';
+import { Button } from 'react-bootstrap';
 
 export function ProfileScreen() {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -87,9 +88,9 @@ export function ProfileScreen() {
 
   return (
     <div>
-      <button className="logout-button" onClick={handleLogout}>
+      <Button variant="warning" onClick={handleLogout}>
         Log Out
-      </button>
+      </Button>
       <h2>{profile.username}'s Profile</h2>
       {profile.accountType === 3 && (
         <div>
@@ -105,8 +106,13 @@ export function ProfileScreen() {
             onChange={(e) => setInvite(e.target.value)}
             placeholder="Enter User to invite to your group/organization"
           />
-          <button onClick={inviteUser}>Invite User</button>
-          <p>This account is {isPrivate} <button onClick={handlePrivate}>toggle</button></p>
+          <Button variant="outline-primary" onClick={inviteUser}>Invite User</Button>
+          <p></p>
+          <p>This account is {isPrivate} {isPrivate === "Private" ? (
+            <Button variant="outline-danger" onClick={handlePrivate}>toggle</Button>
+          ) : (
+            <Button variant="outline-primary" onClick={handlePrivate}>toggle</Button>
+           )}</p>
         </div>
       }
       {profile.accountType === 1 &&

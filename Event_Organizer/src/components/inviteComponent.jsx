@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
+import { Button } from 'react-bootstrap';
+
 
 export function InviteComponent({ groupName }) {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -36,8 +38,8 @@ export function InviteComponent({ groupName }) {
       {!responded ? (
         <div>
           <p>{groupName} has invited you to join their group.</p>
-          <button onClick={() => inviteResponse(true)}>Accept</button>
-          <button onClick={() => inviteResponse(false)}>Reject</button>
+          <Button variant="outline-primary" onClick={() => inviteResponse(true)}>Accept</Button>
+          <Button variant="outline-primary" onClick={() => inviteResponse(false)}>Reject</Button>
         </div>
       ) : (
         <p>Responded to {groupName}'s invite!</p>

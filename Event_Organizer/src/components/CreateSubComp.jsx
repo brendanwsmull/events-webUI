@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfileComp.css';
 import { ProfileContext } from '../contexts/profileContext';
+import { Button } from 'react-bootstrap';
+
 
 export function CreateSubAccountScreen() {
   const [username, setUsername] = useState('');
@@ -58,9 +60,9 @@ export function CreateSubAccountScreen() {
         onChange={(e) => setPassword(e.target.value)}
         className="login-input"
       />
-      <button onClick={handleCreateSubAccount} className="login-button">
+      <Button variant="outline-primary" onClick={handleCreateSubAccount} className="login-button">
         Create Account
-      </button>
+      </Button>
     </div>
   );
 }

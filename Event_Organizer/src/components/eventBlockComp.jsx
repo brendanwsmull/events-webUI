@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 import "./eventBlockComp.css"
+import { Button } from 'react-bootstrap';
+
 
 export function EventBlockComp({ event, type }) {
   const baseURL = "http://localhost:5000/"
@@ -59,9 +61,9 @@ export function EventBlockComp({ event, type }) {
           <p><b>Location:</b> {event.locationName}</p>
           <p><b>Capacity:</b> {event.cap}</p>
           <p><b>Tags:</b> {event.tags}</p>
-          {type === 1 && <button onClick={unSignUp}>Remove</button>}
-          {type === 2 && <button onClick={deleteEvent}>Delete Event</button>}
-          {type === 3 && <button onClick={signUp}>Sign Up</button>}
+          {type === 1 && <Button variant="outline-primary" onClick={unSignUp}>Remove</Button>}
+          {type === 2 && <Button variant="outline-primary" onClick={deleteEvent}>Delete Event</Button>}
+          {type === 3 && <Button variant="outline-primary" onClick={signUp}>Sign Up</Button>}
         </div>
       ) : (
         <div>
