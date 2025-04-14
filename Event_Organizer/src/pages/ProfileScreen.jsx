@@ -5,7 +5,7 @@ import { ProfileContext } from '../contexts/profileContext';
 import { CreateSubAccountScreen } from '../components/CreateSubComp'
 import { RegularUserProfile } from '../components/regularUserProfile';
 import { EventBlockComp } from '../components/eventBlockComp';
-import { Button } from 'react-bootstrap';
+import { Button, Tab, Tabs } from 'react-bootstrap';
 
 export function ProfileScreen() {
   const { profile, setProfile } = useContext(ProfileContext);
@@ -88,58 +88,65 @@ export function ProfileScreen() {
 
   return (
     <div>
-      <Button variant="warning" onClick={handleLogout}>
+      <Button className="float-end" variant="warning" onClick={handleLogout}>
         Log Out
       </Button>
       <h2>{profile.username}'s Profile</h2>
+      <Tabs defaultActiveKey="events" id="Profile Menu" className="mb-3">
+        <Tab eventKey="events" title="Events">
+          <p>Events you're currently signed up for:</p>
+          {attendingEvents.length === 0 ? (
+            <p>No events found</p>
+          ) : (
+            <div className="event-container">
+              {attendingEvents.map((event, index) => (
+                <EventBlockComp key={index} event={event} type={1}/>
+              ))}
+            </div>
+          )}
+          <p>Your Events:</p>
+          {hostingEvents.length === 0 ? (
+            <p>No events found</p>
+          ) : (
+            <div className="event-container">
+              {hostingEvents.map((event, index) => (
+                <EventBlockComp key={index} event={event} type={2}/>
+              ))}
+            </div>
+          )}
+        </Tab>        
+        <Tab eventKey="settings" title="Settings">
+          {profile.accountType === 1 &&
+            <div>
+              <RegularUserProfile />
+            </div>
+          }
+          {profile.accountType >= 2 &&
+            <div>
+              <p>You can invite accounts here:</p>
+              <input
+                type="text"
+                onChange={(e) => setInvite(e.target.value)}
+                placeholder="Enter User to invite to your group/organization"
+              />
+              <Button variant="outline-primary" onClick={inviteUser}>Invite User</Button>
+              <p></p>
+              <p>This account is {isPrivate} {isPrivate === "Private" ? (
+                <Button variant="outline-danger" onClick={handlePrivate}>toggle</Button>
+              ) : (
+                <Button variant="outline-primary" onClick={handlePrivate}>toggle</Button>
+              )}</p>
+            </div>
+          }
+        </Tab>
+      </Tabs>
       {profile.accountType === 3 && (
         <div>
           <p>You can create sub accounts here:</p>
           <CreateSubAccountScreen />
         </div>
       )}
-      {profile.accountType >= 2 &&
-        <div>
-          <p>You can invite accounts here:</p>
-          <input
-            type="text"
-            onChange={(e) => setInvite(e.target.value)}
-            placeholder="Enter User to invite to your group/organization"
-          />
-          <Button variant="outline-primary" onClick={inviteUser}>Invite User</Button>
-          <p></p>
-          <p>This account is {isPrivate} {isPrivate === "Private" ? (
-            <Button variant="outline-danger" onClick={handlePrivate}>toggle</Button>
-          ) : (
-            <Button variant="outline-primary" onClick={handlePrivate}>toggle</Button>
-           )}</p>
-        </div>
-      }
-      {profile.accountType === 1 &&
-        <div>
-          <RegularUserProfile />
-        </div>
-      }
-      <p>Events you're currently signed up for:</p>
-      {attendingEvents.length === 0 ? (
-        <p>No events found</p>
-      ) : (
-        <div className="event-container">
-          {attendingEvents.map((event, index) => (
-            <EventBlockComp key={index} event={event} type={1}/>
-          ))}
-        </div>
-      )}
-      <p>Your Events:</p>
-      {hostingEvents.length === 0 ? (
-        <p>No events found</p>
-      ) : (
-        <div className="event-container">
-          {hostingEvents.map((event, index) => (
-            <EventBlockComp key={index} event={event} type={2}/>
-          ))}
-        </div>
-      )}
+      
     </div>
   );
 }
