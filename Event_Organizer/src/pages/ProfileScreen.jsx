@@ -138,14 +138,14 @@ export function ProfileScreen() {
               )}</p>
             </div>
           }
+          {profile.accountType === 3 && (
+            <div>
+              <p>You can create sub accounts here:</p>
+              <CreateSubAccountScreen />
+            </div>
+          )}
         </Tab>
       </Tabs>
-      {profile.accountType === 3 && (
-        <div>
-          <p>You can create sub accounts here:</p>
-          <CreateSubAccountScreen />
-        </div>
-      )}
       
     </div>
   );

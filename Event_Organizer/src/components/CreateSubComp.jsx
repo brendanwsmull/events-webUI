@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ProfileComp.css';
 import { ProfileContext } from '../contexts/profileContext';
-import { Button } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 
 export function CreateSubAccountScreen() {
@@ -40,26 +40,26 @@ export function CreateSubAccountScreen() {
         return;
     }
   }
-
+  // using InputGroups from here: https://react-bootstrap.netlify.app/docs/forms/input-group
   return (
     <div >
       <h3>Create Sub Account</h3>
-      <p>Enter your username below</p>
-      <input
-        type="text"
-        placeholder="Enter a Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="login-input"
-      />
-      <p>Enter your password below</p>
-      <input
-        type="password"
-        placeholder="Enter a Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="login-input"
-      />
+      <InputGroup className="mb-3">
+        <InputGroup.Text>Sub Credentials:</InputGroup.Text>
+        <Form.Control 
+          aria-label="username"
+          placeholder="Enter a Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} 
+        />
+        <Form.Control 
+          aria-label="password"
+          placeholder="Enter a Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} 
+        />
+      </InputGroup>
       <Button variant="outline-primary" onClick={handleCreateSubAccount} className="login-button">
         Create Account
       </Button>
