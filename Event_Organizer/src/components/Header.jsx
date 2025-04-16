@@ -4,7 +4,7 @@ import './Header.css';
 
 function Header() {
   return (
-    <header className="header-container">
+    <div className="header-container">
       <h1 className="header-title">Events Hub</h1>
       <nav className="header-nav">
         <ul>
@@ -25,7 +25,7 @@ function Header() {
           </li>
         </ul>
       </nav>
-    </header>
+    </div>
   );
 }
 
