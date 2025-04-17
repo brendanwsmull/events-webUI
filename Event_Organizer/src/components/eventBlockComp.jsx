@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 import "./eventBlockComp.css"
-import { Button } from 'react-bootstrap';
+import { Button, Card, ListGroup } from 'react-bootstrap';
 
 
 export function EventBlockComp({ event, type }) {
@@ -47,24 +47,32 @@ export function EventBlockComp({ event, type }) {
       return
     }
   }
-  
+  // set styling to use bootstrap cards found here: https://react-bootstrap.netlify.app/docs/components/cards
   return (
     <div className="event-block">
       {visible ? (
-        <div>
-          <h3>{event.eventName}</h3>
-          {event.hostName && (
-            <p><b>Event Host: </b>{event.hostName}</p>
-          )}
-          <p>{event.eventDesc}</p>
-          <p><b>Date:</b> {event.date}</p>
-          <p><b>Location:</b> {event.locationName}</p>
-          <p><b>Capacity:</b> {event.cap}</p>
-          <p><b>Tags:</b> {event.tags}</p>
-          {type === 1 && <Button variant="outline-primary" onClick={unSignUp}>Remove</Button>}
-          {type === 2 && <Button variant="outline-primary" onClick={deleteEvent}>Delete Event</Button>}
-          {type === 3 && <Button variant="outline-primary" onClick={signUp}>Sign Up</Button>}
-        </div>
+        <Card style={{ width: '23rem'}}>
+          <Card.Body>
+            <Card.Title>{event.eventName}</Card.Title>
+            {event.hostName && (
+              <div>
+                <br />
+                <Card.Subtitle className="mb-2 text-muted"><b>Event Host: </b>{event.hostName}</Card.Subtitle>
+              </div>
+            )}
+            <Card.Text>{event.eventDesc}</Card.Text>
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item><b>Date:</b> {event.date}</ListGroup.Item>
+              <ListGroup.Item><b>Address:</b> {event.locationName}</ListGroup.Item>
+              <ListGroup.Item><b>Capacity:</b> {event.cap}</ListGroup.Item>
+              <ListGroup.Item><b>Tags:</b> {event.tags}</ListGroup.Item>
+            </ListGroup>
+            <br />
+            {type === 1 && <Button variant="outline-primary" onClick={unSignUp}>Remove</Button>}
+            {type === 2 && <Button variant="outline-primary" onClick={deleteEvent}>Delete Event</Button>}
+            {type === 3 && <Button variant="outline-primary" onClick={signUp}>Sign Up</Button>}
+          </Card.Body>
+        </Card>
       ) : (
         <div>
           <p>event removed</p>

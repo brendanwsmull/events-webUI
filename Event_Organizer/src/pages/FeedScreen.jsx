@@ -30,20 +30,32 @@ export function FeedScreen() {
   return (
     <div>
       <h1>Your Events Feed</h1>
-      {events.length === 0 && gEvents.length == 0 ? (
+      {events.length === 0 ? (
         <p>No events found</p>
       ) : (
         <div>
-          <div className="event-container">
-            {gEvents.map((gEvent, index) => (
-              <EventBlockComp key={`${index}`} event={gEvent} type={3}/>
-            ))}
-          </div>
-          <div className="event-container">
-            {events.map((event, index) => (
-              <EventBlockComp key={`${index}`} event={event} type={3}/>
-            ))}
-          </div>
+          {gEvents.length !== 0 && (
+            <div>
+              <h3>Events hosted by your group:</h3>
+              <div className="event-container">
+                {gEvents.map((gEvent, index) => (
+                  <EventBlockComp key={`${index}`} event={gEvent} type={3}/>
+                ))}
+              </div>
+            </div>
+          )}
+          {events.length !== 0 && (
+            <div>
+              <br />
+              <br />
+              <h3>Public Events that match your prefrences:</h3>
+              <div className="event-container">
+                {events.map((event, index) => (
+                  <EventBlockComp key={`${index}`} event={event} type={3}/>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
