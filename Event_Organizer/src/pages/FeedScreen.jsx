@@ -2,13 +2,15 @@ import React, { useState, useContext, useEffect } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 import { LocationContext } from '../contexts/locationContext';
 import { EventBlockComp } from '../components/eventBlockComp';
+import { useNavigate } from 'react-router-dom';
 import './ProfileScreen.css';
 
 export function FeedScreen() {
-  const { profile, setProfile } = useContext(ProfileContext);
-  const { userLocation, setUserLocation } = useContext(LocationContext);
+  const { profile } = useContext(ProfileContext);
+  const { userLocation } = useContext(LocationContext);
   const [ events, setEvents ] = useState([]);
   const [ gEvents, setGEvents ] = useState([]);
+  const navigate = useNavigate();
   const baseURL = "http://localhost:5000/"
 
   const getFeed = async () => {
@@ -25,6 +27,7 @@ export function FeedScreen() {
 
   useEffect(() => {
     getFeed();
+    if (profile.accountType >= 2) navigate('/app/profile');
   }, []);
   
   return (
