@@ -14,7 +14,7 @@ export function ProfileScreen() {
   const [ attendingEvents, setAttendingEvents ] = useState([]);
   const [ hostingEvents, setHostingEvents ] = useState([]);
   const navigate = useNavigate();
-  const baseURL = process.env.REACT_APP_BASE_URL;
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     setIsPrivate(profile.isPrivate ? "Private" : "Public");

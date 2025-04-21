@@ -6,7 +6,7 @@ import { Button, ButtonGroup } from 'react-bootstrap';
 export function InviteComponent({ groupName }) {
   const { profile, setProfile } = useContext(ProfileContext);
   const [ responded, setResponded ] = useState(false);
-  const baseURL = process.env.REACT_APP_BASE_URL;
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const inviteResponse = async (accept) => {
     // send either the accept or reject response to the invite

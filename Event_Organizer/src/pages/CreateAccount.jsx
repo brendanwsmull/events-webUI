@@ -7,6 +7,7 @@ export function CreateAccountScreen() {
   const [password, setPassword] = useState('');
   const [userType, setUserType] = useState('');
   const navigate = useNavigate();
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const handleCreateAccount = async () => {
     console.log("create button clicked")
@@ -19,7 +20,7 @@ export function CreateAccountScreen() {
       password: password,
       accountType: userType
     }
-    const response = await fetch("http://localhost:5000/createAccount", {
+    const response = await fetch(`${baseURL}/createAccount`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -8,6 +8,7 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { profile, setProfile } = useContext(ProfileContext); // use this for access and setting profile json
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const handleLogin = async () => {
     console.log('Username:', username, 'Password:', password);
@@ -15,7 +16,7 @@ export default function LoginScreen() {
       alert("you forgot to enter user details");
       return
     }
-    const response = await fetch(`http://localhost:5000/login?username=${username}&password=${password}`);
+    const response = await fetch(`${baseURL}/login?username=${username}&password=${password}`);
     const data = await response.json();
     if (data.success) {
       setProfile(data);

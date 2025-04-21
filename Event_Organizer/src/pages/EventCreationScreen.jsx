@@ -10,7 +10,7 @@ export function EventCreationScreen() {
   const [ cap, setCap ] = useState(0);
   const [ tags, setTags ] = useState('');
   const [eventDateTime, setEventDateTime] = useState('');
-  const baseURL = process.env.REACT_APP_BASE_URL;
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const submitEvent = async () => {
     if (cap < 0) {

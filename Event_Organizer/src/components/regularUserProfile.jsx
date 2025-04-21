@@ -11,7 +11,7 @@ export function RegularUserProfile() {
   const [ currentGroups, setCurrentGroups ] = useState('None');
   const [ distance, setDistance ] = useState('0');
   const [ invitedToGroups, setInvitedToGroups ] = useState([]); // to hold the json of groups the user is invited to
-  const baseURL = process.env.REACT_APP_BASE_URL;
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const updatePreferences = async () => {
     // send api request to insert new string of prefrences
