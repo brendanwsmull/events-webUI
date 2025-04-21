@@ -14,7 +14,7 @@ export function ProfileScreen() {
   const [ attendingEvents, setAttendingEvents ] = useState([]);
   const [ hostingEvents, setHostingEvents ] = useState([]);
   const navigate = useNavigate();
-  const baseURL = "http://localhost:5000/"
+  const baseURL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
     setIsPrivate(profile.isPrivate ? "Private" : "Public");

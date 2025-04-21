@@ -10,7 +10,7 @@ export function EventCreationScreen() {
   const [ cap, setCap ] = useState(0);
   const [ tags, setTags ] = useState('');
   const [eventDateTime, setEventDateTime] = useState('');
-  const baseURL = 'http://localhost:5000/';
+  const baseURL = process.env.REACT_APP_BASE_URL;
 
   const submitEvent = async () => {
     if (cap < 0) {

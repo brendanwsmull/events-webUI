@@ -11,7 +11,7 @@ export function FeedScreen() {
   const [ events, setEvents ] = useState([]);
   const [ gEvents, setGEvents ] = useState([]);
   const navigate = useNavigate();
-  const baseURL = "http://localhost:5000/"
+  const baseURL = process.env.REACT_APP_BASE_URL;
 
   const getFeed = async () => {
     // for some reason the lat and long are swapped, no clue why but this works

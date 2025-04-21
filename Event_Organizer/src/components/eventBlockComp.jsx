@@ -5,7 +5,7 @@ import { Button, Card, ListGroup } from 'react-bootstrap';
 
 
 export function EventBlockComp({ event, type }) {
-  const baseURL = "http://localhost:5000/"
+  const baseURL = process.env.REACT_APP_BASE_URL;
   const { profile, setProfile } = useContext(ProfileContext);
   const [ visible, setVisible ] = useState(true);
   
