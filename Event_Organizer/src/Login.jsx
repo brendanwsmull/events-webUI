@@ -12,7 +12,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     console.log('Username:', username, 'Password:', password);
     if (username == '' || password == '') {
-      alert("you forgot to enter in user details");
+      alert("you forgot to enter user details");
       return
     }
     const response = await fetch(`http://localhost:5000/login?username=${username}&password=${password}`);
@@ -49,7 +49,8 @@ export default function LoginScreen() {
       <button onClick={handleLogin} className="login-button">
         Login
       </button>
-      <p onClick={goToCreateAccount}>Create Account</p>
+      <p/>
+      <p class="create-acc-button" onClick={goToCreateAccount}>Create Account</p>
     </div>
   );
 }

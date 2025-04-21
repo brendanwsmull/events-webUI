@@ -23,3 +23,8 @@
     margin-top: 20px;
     cursor: pointer;
   }
+
+  .create-acc-button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
