@@ -42,6 +42,9 @@ export function EventBlockComp({ event, type }) {
       alert("Signed up for the event!");
       return;
     }
+    else if (response.status === 403) {
+      alert("Already signed up for this event\n(See \"Profile\" page)")
+    }
     else {
       alert("Something went wrong when trying to sign up for your event!");
       return
