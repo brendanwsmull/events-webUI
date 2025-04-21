@@ -94,14 +94,18 @@ export function ProfileScreen() {
       <h2>{profile.username}'s Profile</h2>
       <Tabs defaultActiveKey="events" id="Profile Menu" className="mb-3">
         <Tab eventKey="events" title="Events">
-          <p>Events you're currently signed up for:</p>
-          {attendingEvents.length === 0 ? (
-            <p>No events found</p>
-          ) : (
-            <div className="event-container">
-              {attendingEvents.map((event, index) => (
-                <EventBlockComp key={index} event={event} type={1}/>
-              ))}
+          {profile.accountType === 1 && (
+            <div>
+              <p>Events you're currently signed up for:</p>
+              {attendingEvents.length === 0 ? (
+                <p>No events found</p>
+              ) : (
+                <div className="event-container">
+                  {attendingEvents.map((event, index) => (
+                    <EventBlockComp key={index} event={event} type={1}/>
+                  ))}
+                </div>
+              )}
             </div>
           )}
           <p>Your Events:</p>
@@ -129,10 +133,10 @@ export function ProfileScreen() {
                 onChange={(e) => setInvite(e.target.value)}
                 placeholder="Enter User to invite to your group/organization"
               />
-              <Button variant="outline-primary" onClick={inviteUser}>Invite User</Button>
+              <Button variant="outline-primary" style={{ marginLeft: '10px' }} onClick={inviteUser}>Invite User</Button>
               <p></p>
               <p>This account is {isPrivate} {isPrivate === "Private" ? (
-                <Button variant="outline-danger" onClick={handlePrivate}>toggle</Button>
+                <Button variant="outline-danger" style={{ marginLeft: '10px' }} onClick={handlePrivate}>toggle</Button>
               ) : (
                 <Button variant="outline-primary" onClick={handlePrivate}>toggle</Button>
               )}</p>

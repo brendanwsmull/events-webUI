@@ -110,9 +110,10 @@ export function RegularUserProfile() {
     });
     if (response.status === 200) {
       alert("Update Complete");
-  } else {
-      alert("Something went wrong");
-  }
+    } 
+    else {
+        alert("Something went wrong");
+    }
   };
 
   const getInvitedList = async () => {
@@ -145,7 +146,7 @@ export function RegularUserProfile() {
         onChange={(e) => setPreferences(e.target.value)}
         placeholder="Enter your preferences..."
       />
-      <Button variant="outline-primary" onClick={updatePreferences}>Update Prefrences</Button>
+      <Button variant="outline-primary" style={{ marginLeft: '10px' }} onClick={updatePreferences}>Update Prefrences</Button>
       <p>Current Preferences: {currentPreferences}</p>
       <p>Request to join an organizatino/group:</p>
       <input 
@@ -154,7 +155,7 @@ export function RegularUserProfile() {
         onChange={(e) => setJoinAccount(e.target.value)}
         placeholder="Enter account name here"
       />
-      <Button variant="outline-primary" onClick={sendJoinRequest}>Send Request</Button>
+      <Button variant="outline-primary" style={{ marginLeft: '10px' }} onClick={sendJoinRequest}>Send Request</Button>
       <p>You are currently apart of these groups: {currentGroups}</p>
       <p>These groups are inviting you to join their group/organization</p>
       {invitedToGroups.length > 0 ? (
@@ -172,7 +173,7 @@ export function RegularUserProfile() {
         onChange={(e) => setDistance(e.target.value)}
         placeholder='Something went wrong...'
       />
-      <Button variant="outline-primary" onClick={updateDistance}>Update Disance Preference</Button>
+      <Button variant="outline-primary" style={{ marginLeft: '10px' }} onClick={updateDistance}>Update Disance Preference</Button>
     </div>
   );
 };
