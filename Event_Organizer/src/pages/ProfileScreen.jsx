@@ -36,7 +36,7 @@ export function ProfileScreen() {
         isPrivate: profile.isPrivate
     };
 
-    const response = await fetch("http://localhost:5000/setPrivate", {
+    const response = await fetch(baseURL+"/setPrivate", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -57,7 +57,7 @@ export function ProfileScreen() {
       UUID: profile.uuid,
       invitedUser: invite
     };
-    const response = await fetch("http://localhost:5000/inviteAccount", {
+    const response = await fetch(baseURL+"/inviteAccount", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
