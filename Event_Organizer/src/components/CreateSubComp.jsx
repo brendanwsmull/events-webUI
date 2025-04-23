@@ -9,6 +9,7 @@ export function CreateSubAccountScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { profile, setProfile } = useContext(ProfileContext);
+  const baseURL =  import.meta.env.VITE_BASE_URL;
 
   const handleCreateSubAccount = async () => {
     console.log("create sub button clicked")
@@ -21,7 +22,7 @@ export function CreateSubAccountScreen() {
       username: username,
       password: password
     }
-    const response = await fetch("http://localhost:5000/createSubAccount", {
+    const response = await fetch(baseURL + "/createSubAccount", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
