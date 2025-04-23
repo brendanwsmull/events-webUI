@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { ProfileContext } from '../contexts/profileContext';
 import "./eventBlockComp.css"
 import { Button, Card, ListGroup } from 'react-bootstrap';
+import { useNavigate  } from 'react-router-dom';
 
 
 export function EventBlockComp({ event, type }) {
   const baseURL =  import.meta.env.VITE_BASE_URL;
   const { profile, setProfile } = useContext(ProfileContext);
   const [ visible, setVisible ] = useState(true);
+  const navigate = useNavigate();
   
   const unSignUp = async () => {
     const response = await fetch(baseURL+ `unSignUpEvent?UUID=${profile.uuid}&UEID=${event.UEID}`);
@@ -50,13 +52,17 @@ export function EventBlockComp({ event, type }) {
       return
     }
   }
+
+  const titleClick = () => {
+    navigate(`/app/event/${event.UEID}`);
+  }
   // set styling to use bootstrap cards found here: https://react-bootstrap.netlify.app/docs/components/cards
   return (
     <div className="event-block">
       {visible ? (
         <Card style={{ width: '23rem'}}>
           <Card.Body>
-            <Card.Title>{event.eventName}</Card.Title>
+            <Card.Title className="click-title" onClick={titleClick}>{event.eventName}</Card.Title>
             {event.hostName && (
               <div>
                 <br />

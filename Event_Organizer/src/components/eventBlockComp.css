@@ -8,3 +8,8 @@
   border: 1px solid #ccc;
   padding: 12px;
 }
+
+.click-title:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
