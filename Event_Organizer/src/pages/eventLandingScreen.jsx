@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
 import { ProfileContext } from '../contexts/profileContext';
 import { Button, ListGroup } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 
 const EventLandingScreen = () => {
   const { eventID } = useParams();
@@ -59,7 +60,7 @@ const EventLandingScreen = () => {
         <div className="justify-content-center">
           <h1 className="mb-3 text-center">{event.eventName}</h1>
           <ListGroup className="mb-4">
-            <ListGroup.Item><strong>Desc:</strong> {event.eventDesc}</ListGroup.Item>
+            <ListGroup.Item><strong>Desc:</strong> <ReactMarkdown>{event.eventDesc}</ReactMarkdown></ListGroup.Item>
             <ListGroup.Item><strong>Date:</strong> {event.date}</ListGroup.Item>
             <ListGroup.Item><strong>Location:</strong> {event.locationName}</ListGroup.Item>
             <ListGroup.Item><strong>Capacity:</strong> {event.cap} people</ListGroup.Item>

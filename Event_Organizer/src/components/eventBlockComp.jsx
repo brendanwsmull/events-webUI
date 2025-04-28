@@ -3,6 +3,7 @@ import { ProfileContext } from '../contexts/profileContext';
 import "./eventBlockComp.css"
 import { Button, Card, ListGroup } from 'react-bootstrap';
 import { useNavigate  } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 
 export function EventBlockComp({ event, type }) {
@@ -69,7 +70,7 @@ export function EventBlockComp({ event, type }) {
                 <Card.Subtitle className="mb-2 text-muted"><b>Event Host: </b>{event.hostName}</Card.Subtitle>
               </div>
             )}
-            <Card.Text>{event.eventDesc}</Card.Text>
+            <Card.Text><ReactMarkdown>{event.eventDesc}</ReactMarkdown></Card.Text>
             <ListGroup className="list-group-flush">
               <ListGroup.Item><b>Date:</b> {event.date}</ListGroup.Item>
               <ListGroup.Item><b>Address:</b> {event.locationName}</ListGroup.Item>
